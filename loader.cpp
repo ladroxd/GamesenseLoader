@@ -6,10 +6,11 @@
 #include <string>
 
 
-constexpr int DColor = 7;
-constexpr int EColor = 13;
-constexpr int SColor = 2;
-
+constexpr int Default = 7 ;
+constexpr int Purple = 13;
+constexpr int Green = 2;
+constexpr int Grey = 8;
+constexpr int Red = 12;
 
 
 void SetColor(int color) {
@@ -56,7 +57,7 @@ int main() {
     char lpFullDLLPath[MAX_PATH];
     SetConsoleOutputCP(CP_UTF8);
 
-    SetColor(10);
+    SetColor(Green);
     std::cout << "                                                                                                                  \n";
     std::cout << "                                                                                                                  \n";
     std::cout << "                                                                                                                  \n";
@@ -78,42 +79,53 @@ int main() {
     std::cout << "                                                                                                               \n";
     std::cout << "                                                                                                               \n";
 
-    SetColor(12);
+    SetColor(Grey);
 
-    std::cout << "                                             CSGO not running ! \n\n";
-
+    std::cout << "                                     !  Checking for the game process ! \n\n";
+    std::cout << "                                                      .                                                     \n";
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::cout << "                                                      .                                                     \n";
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::cout << "                                                      .                                                     \n";
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::cout << "                                                      .                                                     \n";
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::cout << "                                                      .                                                     \n";
+    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::cout << "                                                      .                                                     \n";
+    std::this_thread::sleep_for(std::chrono::seconds(1));
     DWORD dwProcessID = -1;
     while (dwProcessID == (DWORD)-1) {
         dwProcessID = GetProcessByName(lpProcessName);
         if (dwProcessID == (DWORD)-1) {
-            SetColor(8);
-            std::cout << "                                          Waiting for csgo.exe ...\r";
-            SetColor(DColor);
+            SetColor(Grey);
+            std::cout << "                                         CSGO not detected. Waiting for game to be launched ...\r";
+            SetColor(Default);
         
             std::this_thread::sleep_for(std::chrono::seconds(1));
         }
     }
 
-    SetColor(2);
-    std::cout << "\n\n\n\n\n\n\n                                           CSGO Detected\n\n";
+    SetColor(Green);
+    std::cout << "\n\n\n                                            !  CSGO Detected  !\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
 
     if (!GetFullPathNameA(lpDLLName, MAX_PATH, lpFullDLLPath, nullptr)) {
-        SetColor(13);
-        std::cout << "                                                Error(-1): Failed to resolve the full path for the DLL.\n";
-        std::cout << "                                                Result: Process Termination.\n\n\n\n\n";
-        SetColor(DColor);
+        SetColor(Purple);
+        std::cout << "                                        Error(-1): Failed to resolve the full path for the DLL.\n";
+        std::cout << "                                          Result: Process Termination.\n\n\n\n\n";
+        SetColor(Default);
         return -1;
     }
 
     DWORD dwAttributes = GetFileAttributesA(lpFullDLLPath);
     if (dwAttributes == INVALID_FILE_ATTRIBUTES || (dwAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-        SetColor(13);
-        std::cout << "                \n\n\n\n                   Error(-1): DLL file \"" << lpDLLName << "\" not found in the same directory as the loader.\n";
-        std::cout << "                                                Result: Process Termination.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+        SetColor(Purple);
+        std::cout << "                \n\n\n\n                 Error(-1): DLL file \"" << lpDLLName << "\" not found in the same directory as the loader.\n";
+        std::cout << "                                        Result: Process Termination.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
         std::this_thread::sleep_for(std::chrono::seconds(10));
-        SetColor(DColor);
+        SetColor(Default);
 
         return -1;
     }
@@ -121,9 +133,9 @@ int main() {
 
     const HANDLE hTargetProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwProcessID);
     if (hTargetProcess == nullptr) {
-        SetColor(13);
+        SetColor(Purple);
         std::cout << "Error: Could not open the target process. Ensure you are running as administrator.\n";
-        SetColor(DColor);
+        SetColor(Default);
         return -1;
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
@@ -134,28 +146,30 @@ int main() {
 
     const LPVOID lpPathAddress = VirtualAllocEx(hTargetProcess, nullptr, lstrlenA(lpFullDLLPath) + 1, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
     if (lpPathAddress == nullptr) {
-        SetColor(13);
-        std::cout << "Error: Could not allocate memory in the target process.\n";
-        SetColor(DColor);
+        SetColor(Purple);
+        std::cout << "                 Error: Could not allocate memory in the target process.\n";
+        SetColor(Default);
         CloseHandle(hTargetProcess);
+        std::this_thread::sleep_for(std::chrono::seconds(5));
         return -1;
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
 
-    SetColor(SColor);
-    std::cout << "\nMemory allocated in target process at: " << std::hex << (uintptr_t)lpPathAddress << "\n";
+    SetColor(Green);
+    std::cout << "\n                                        Memory allocated in target process at: " << std::hex << (uintptr_t)lpPathAddress << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
 
     if (!WriteProcessMemory(hTargetProcess, lpPathAddress, lpFullDLLPath, lstrlenA(lpFullDLLPath) + 1, nullptr)) {
-        SetColor(EColor);
-        std::cout << "Error: Could not write the DLL path to the target process memory.\n";
-        SetColor(DColor);
+        SetColor(Red);
+        std::cout << "                 Error: Could not write the DLL path to the target process memory.\n";
+        SetColor(Default);
         CloseHandle(hTargetProcess);
+        std::this_thread::sleep_for(std::chrono::seconds(5));
         return -1;
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-    std::cout << "DLL path written successfully.\n";
+    std::cout << "                                        DLL path written successfully.\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
     const HMODULE hModule = GetModuleHandleA("kernel32.dll");
@@ -165,31 +179,32 @@ int main() {
     const FARPROC lpFunctionAddress = GetProcAddress(hModule, "LoadLibraryA");
     if (lpFunctionAddress == nullptr)
     {
-        SetColor(13);
-        printf("An error occurred when trying to get \"LoadLibraryA\" address.\n");
-        SetColor(7);
+        SetColor(Purple);
+        printf("                 An error occurred when trying to get \"LoadLibraryA\" address.\n");
+        SetColor(Default);
+        std::this_thread::sleep_for(std::chrono::seconds(5));
         return -1;
     }
 
-    printf("LoadLibraryA address at 0x%X\n", (UINT)(uintptr_t)lpFunctionAddress);
+    printf("                                        LoadLibrary address at 0x%X\n", (UINT)(uintptr_t)lpFunctionAddress);
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
 
     const HANDLE hThreadCreationResult = CreateRemoteThread(hTargetProcess, nullptr, 0, (LPTHREAD_START_ROUTINE)lpFunctionAddress, lpPathAddress, 0, nullptr);
     if (hThreadCreationResult == INVALID_HANDLE_VALUE)
     {
-        SetColor(EColor);
-        std::cout << "Error: Could not create a remote thread in the target process.\n";
-        SetColor(DColor);
+        SetColor(Red);
+        std::cout << "                 Error (-1) : Could not create a remote thread in the target process.\n";
+        SetColor(Default);
         CloseHandle(hTargetProcess);
         return -1; \
-            std::this_thread::sleep_for(std::chrono::seconds(1));
+            std::this_thread::sleep_for(std::chrono::seconds(5));
     }
 
-    SetColor(SColor);
-    std::cout << "Gamesense Loaded Successfully!\n";
+    SetColor(Green);
+    std::cout << "                                        Gamesense Loaded Successfully!\n";
     std::this_thread::sleep_for(std::chrono::seconds(10));
 
-    SetColor(DColor);
+    SetColor(Default);
     return 0;
 }
