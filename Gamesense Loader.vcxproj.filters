@@ -40,4 +40,9 @@
   <ItemGroup>
     <Xml Include="app.manifest" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="README.md">
+      <Filter>Source Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>
