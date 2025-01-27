@@ -1,4 +1,4 @@
-Q# Updated & Refined Version by Ladro (Ainzy)
+# Updated & Refined Version by Ladro (Ainzy)
   
     
   - Fixed the Loader bypass the the dll check and still execute the following steps ( Even if there's no dll )
@@ -8,7 +8,7 @@ Q# Updated & Refined Version by Ladro (Ainzy)
 
 
 
-# In case you're still crashing ( Spencer Method )
+## In case you're still crashing (Spencer Method)
 ### upgrade your windows to ( windows 11 24H2 ) If its still crashing Downgrade to Win 10 22H2
 How to update [tutorial](https://www.youtube.com/watch?v=i1_4ieEwhhY&ab_channel=Tips2Fix).
 
