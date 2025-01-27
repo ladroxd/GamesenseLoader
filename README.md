@@ -1,10 +1,10 @@
 Q# Updated & Refined Version by Ladro (Ainzy)
   
     
-     - Fixed the Loader bypass the the dll check and still execute the following steps ( Even if there's no dll )
-     - Updated UI & Improved Texts.
-     - Removed couple useless lines
-     - Handling quite finished.
+  - Fixed the Loader bypass the the dll check and still execute the following steps ( Even if there's no dll )
+  - Updated UI & Improved Texts.
+  - Removed couple useless lines
+  - Handling quite finished.
 
 
 
