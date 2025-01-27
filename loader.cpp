@@ -134,7 +134,7 @@ int main() {
     const HANDLE hTargetProcess = OpenProcess(PROCESS_ALL_ACCESS, FALSE, dwProcessID);
     if (hTargetProcess == nullptr) {
         SetColor(Purple);
-        std::cout << "Error: Could not open the target process. Ensure you are running as administrator.\n";
+        std::cout << "                 Error: Could not open the target process. Ensure you are running as administrator.\n";
         SetColor(Default);
         return -1;
         std::this_thread::sleep_for(std::chrono::seconds(1));
