@@ -9,20 +9,20 @@
 
 
 ## In case you're still crashing (Spencer Method)
-### upgrade your windows to ( windows 11 24H2 ) If its still crashing Downgrade to Win 10 22H2
+### Upgrade your windows to ( windows 11 24H2 ) If its still crashing Downgrade to Win 10 22H2
 How to update [tutorial](https://www.youtube.com/watch?v=i1_4ieEwhhY&ab_channel=Tips2Fix).
 
 Download C++ packages, from 8 to the latest [link](https://learn.microsoft.com/en-us/cpp/windows/latest-supported-vc-redist?view=msvc-170)
 
 Still crashing?
 
-[injecting crash](https://pastebin.com/SBbeXEdY)
+- [injecting crash](https://pastebin.com/SBbeXEdY)
 
-[Weapon crash](https://pastebin.com/AdWETgxr)
+- [Weapon crash](https://pastebin.com/AdWETgxr)
 
 __________________________________________________________________________________________
 
-> [!IMPORTANT!]
+> [IMPORTANT!]
 > <ins>skeet.dll needs to be in the same folder with the injector.</ins>
 
 1. Download the injector & Dll From release section
@@ -46,6 +46,6 @@ Launch Visual studio with admin rights & Compile in release x86.
 ## Thanks to @Spencer-png for providing and Releasing the base & @kitiroo for providing the libraries & Essentials.
 
 - [ ] Clear the console output After Major events.
-- [ ] Make loader open cs:go automatically  (Working on it as currently it only opens for people that have CSGO in default Path)
+- [ ] Make loader open CSGO automatically (Working on it as currently it only works if you have CSGO in default Path)
 - [ ] Make loader download dll from this GitHub repo
 
