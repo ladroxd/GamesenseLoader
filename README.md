@@ -39,7 +39,7 @@ You'll find a a folder called "gamesense" , all you need to do is drag it into y
  ( Default at : C:\Program Files (x86)\Steam\steamapps\common\Counter-Strike Global Offensive )
    
 
-## Self releasing your ownloader ? 
+## Self releasing your own Loader ? 
 
 Launch Visual studio with admin rights & Compile in release x86.
 
