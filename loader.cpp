@@ -9,9 +9,9 @@
 constexpr int Default = 7 ;
 constexpr int Purple = 13;
 constexpr int Green = 2;
+constexpr int Aqua = 11;
 constexpr int Grey = 8;
 constexpr int Red = 12;
-
 
 void SetColor(int color) {
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), color);
@@ -92,14 +92,14 @@ int main() {
     std::this_thread::sleep_for(std::chrono::seconds(1));
     std::cout << "                                                      .                                                     \n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
-    std::cout << "                                                      .                                                     \n";
+    std::cout << "                                                      .                                                     \n\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
     DWORD dwProcessID = -1;
     while (dwProcessID == (DWORD)-1) {
         dwProcessID = GetProcessByName(lpProcessName);
         if (dwProcessID == (DWORD)-1) {
-            SetColor(Grey);
-            std::cout << "                                         CSGO not detected. Waiting for game to be launched ...\r";
+            SetColor(Aqua);
+            std::cout << "                           CSGO not detected. Waiting for game to be launched ...\r";
             SetColor(Default);
         
             std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -112,7 +112,7 @@ int main() {
 
 
     if (!GetFullPathNameA(lpDLLName, MAX_PATH, lpFullDLLPath, nullptr)) {
-        SetColor(Purple);
+        SetColor(Red);
         std::cout << "                                        Error(-1): Failed to resolve the full path for the DLL.\n";
         std::cout << "                                          Result: Process Termination.\n\n\n\n\n";
         SetColor(Default);
@@ -121,8 +121,8 @@ int main() {
 
     DWORD dwAttributes = GetFileAttributesA(lpFullDLLPath);
     if (dwAttributes == INVALID_FILE_ATTRIBUTES || (dwAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
-        SetColor(Purple);
-        std::cout << "                \n\n\n\n                 Error(-1): DLL file \"" << lpDLLName << "\" not found in the same directory as the loader.\n";
+        SetColor(Red);
+        std::cout << "                \n\n\n\n                Error(-1): DLL file \"" << lpDLLName << "\" not found in the same directory as the loader.\n";
         std::cout << "                                        Result: Process Termination.\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
         std::this_thread::sleep_for(std::chrono::seconds(10));
         SetColor(Default);
@@ -147,7 +147,7 @@ int main() {
     const LPVOID lpPathAddress = VirtualAllocEx(hTargetProcess, nullptr, lstrlenA(lpFullDLLPath) + 1, MEM_COMMIT | MEM_RESERVE, PAGE_EXECUTE_READWRITE);
     if (lpPathAddress == nullptr) {
         SetColor(Purple);
-        std::cout << "                 Error: Could not allocate memory in the target process.\n";
+        std::cout << "                                        Error: Could not allocate memory in the target process.\n";
         SetColor(Default);
         CloseHandle(hTargetProcess);
         std::this_thread::sleep_for(std::chrono::seconds(5));
@@ -162,7 +162,7 @@ int main() {
 
     if (!WriteProcessMemory(hTargetProcess, lpPathAddress, lpFullDLLPath, lstrlenA(lpFullDLLPath) + 1, nullptr)) {
         SetColor(Red);
-        std::cout << "                 Error: Could not write the DLL path to the target process memory.\n";
+        std::cout << "                                        Error: Could not write the DLL path to the target process memory.\n";
         SetColor(Default);
         CloseHandle(hTargetProcess);
         std::this_thread::sleep_for(std::chrono::seconds(5));
@@ -180,7 +180,7 @@ int main() {
     if (lpFunctionAddress == nullptr)
     {
         SetColor(Purple);
-        printf("                 An error occurred when trying to get \"LoadLibraryA\" address.\n");
+        printf("                                        An error occurred when trying to get \"LoadLibraryA\" address.\n");
         SetColor(Default);
         std::this_thread::sleep_for(std::chrono::seconds(5));
         return -1;
