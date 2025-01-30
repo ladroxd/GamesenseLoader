@@ -79,8 +79,14 @@ int main() {
     std::cout << "                                                                                                               \n";
     std::cout << "                                                                                                               \n";
 
-    SetColor(Grey);
+    SetColor(Purple);
+    std::cout << "                          - Set ( -insecure ) in your game launch options.                            \n";
+    std::cout << "                          - Make sure to disable Antiviruses protection & Defender.             \n\n\n";
+    
+    std::this_thread::sleep_for(std::chrono::seconds(2));
 
+    SetColor(Grey);
+        
     std::cout << "                                     !  Checking for the game process ! \n\n";
     std::cout << "                                                      .                                                     \n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
@@ -92,14 +98,14 @@ int main() {
     std::this_thread::sleep_for(std::chrono::seconds(1));
     std::cout << "                                                      .                                                     \n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
-    std::cout << "                                                      .                                                     \n\n";
+    std::cout << "                                                      .                                                     \n\n\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
     DWORD dwProcessID = -1;
     while (dwProcessID == (DWORD)-1) {
         dwProcessID = GetProcessByName(lpProcessName);
         if (dwProcessID == (DWORD)-1) {
             SetColor(Aqua);
-            std::cout << "                           CSGO not detected. Waiting for game to be launched ...\r";
+            std::cout << "                            CSGO not detected. Waiting for game to be launched ...\r";
             SetColor(Default);
         
             std::this_thread::sleep_for(std::chrono::seconds(1));
