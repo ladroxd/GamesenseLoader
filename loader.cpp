@@ -74,7 +74,7 @@ int main() {
     std::cout << u8"                                                                                                                \n";
     std::cout << u8"                                                                                                                \n";
     std::cout << u8"                            ╔════════════════════════════════════════════════════╗                             \n";
-    std::cout << u8"                            ║       Version 1.2       -       Refined by Ladro   ║                             \n";
+    std::cout << u8"                            ║       Version 1.3       -       Refined by Ladro   ║                             \n";
     std::cout << u8"                            ╚════════════════════════════════════════════════════╝                             \n";
     std::cout << "                                                                                                               \n";
     std::cout << "                                                                                                               \n";
@@ -88,8 +88,6 @@ int main() {
     SetColor(Grey);
         
     std::cout << "                                     !  Checking for the game process ! \n\n";
-    std::cout << "                                                      .                                                     \n";
-    std::this_thread::sleep_for(std::chrono::seconds(1));
     std::cout << "                                                      .                                                     \n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
     std::cout << "                                                      .                                                     \n";
@@ -162,7 +160,7 @@ int main() {
     }
 
     SetColor(Green);
-    std::cout << "\n                                        Memory allocated in target process at: " << std::hex << (uintptr_t)lpPathAddress << "\n";
+    std::cout << "\n                                 Memory allocated in target process at: " << std::hex << (uintptr_t)lpPathAddress << "\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
 
@@ -175,7 +173,7 @@ int main() {
         return -1;
         std::this_thread::sleep_for(std::chrono::seconds(1));
     }
-    std::cout << "                                        DLL path written successfully.\n";
+    std::cout << "                                 DLL path written successfully.\n";
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
     const HMODULE hModule = GetModuleHandleA("kernel32.dll");
@@ -192,7 +190,7 @@ int main() {
         return -1;
     }
 
-    printf("                                        LoadLibrary address at 0x%X\n", (UINT)(uintptr_t)lpFunctionAddress);
+    printf("                                 LoadLibrary address at 0x%X\n", (UINT)(uintptr_t)lpFunctionAddress);
     std::this_thread::sleep_for(std::chrono::seconds(1));
 
 
@@ -208,7 +206,7 @@ int main() {
     }
 
     SetColor(Green);
-    std::cout << "                                        Gamesense Loaded Successfully!\n";
+    std::cout << "                                 Gamesense Loaded Successfully!\n";
     std::this_thread::sleep_for(std::chrono::seconds(10));
 
     SetColor(Default);

@@ -1,6 +1,15 @@
 # Updated & Refined Version by Ladro (Ainzy)
   
-    
+   [Current] 
+   
+  - Now the Loader is fully functional & Easy to use.
+  - Added important instructions to avoid any known issue.
+  - Removed useless function could cause crashes & instability.
+  - Better Visual Terminal.
+  - Handling Game & Injection done.
+   
+   
+   [27 Jan 2025] 
   - Fixed the Loader bypass the the dll check and still execute the following steps ( Even if there's no dll )
   - Updated UI & Improved Texts.
   - Removed couple useless lines
@@ -47,5 +56,4 @@ Launch Visual studio with admin rights & Compile in release x86.
 
 - [ ] Clear the console output After Major events.
 - [ ] Make loader open CSGO automatically (Working on it as currently it only works if you have CSGO in default Path)
-- [ ] Make loader download dll from this GitHub repo
-
+- [ ] Make loader download dll from this GitHub repo.
